@@ -11,6 +11,7 @@ let length = 0;
 let prevDir = "right";
 let temp = [];
 let opDirection = "right";
+let intva;
 
 function drawGrid() {
     document.getElementById("grid").innerHTML = "";
@@ -56,16 +57,17 @@ function countdown(){
     setTimeout(function(){document.getElementById("gameState").innerHTML="GO"} , 4000)
     setTimeout(function(){document.getElementById("gameState").innerHTML="" }, 5000)
     setTimeout(function(){document.addEventListener("keydown", keyDownEvent)}, 4000);
+    setTimeout(function(){intva = setInterval(reposition, 100)},4000);
 }
 
 function reposition() {
     drawSnake("white");
     let temp = [];
+    
     switch (direction) {
 
         case "up":
             opDirection="down";
-            if (length === 0 || prevDir != "down") {
                 for (let j = 0; j < length; j++) { temp.push(snake[j]) }
                 snake[0] = snake[0] - size;
                 if (snake[0] <= 0) {
@@ -74,12 +76,11 @@ function reposition() {
                 for (let i = 1; i <= length; i++) {
                     snake[i] = temp[i - 1];
                 }
-            }
+            
             break;
 
         case "right":
-            opDirection="left";
-            if (length === 0 || prevDir != "left") {
+            opDirection="left";   
                 for (let j = 0; j < length; j++) { temp.push(snake[j]) }
 
                 snake[0] = snake[0] + 1;
@@ -90,13 +91,12 @@ function reposition() {
                     for (let i = 1; i <= length; i++) {
                         snake[i] = temp[i - 1]
                     }
-                }
+                
             }
             break;
 
         case "down":
-            opDirection="up";
-            if (length === 0 || prevDir != "up") {
+            opDirection="up";   
                 for (let j = 0; j < length; j++) { temp.push(snake[j]) }
                 snake[0] = snake[0] + size;
                 if (snake[0] > maxSize) {
@@ -105,12 +105,11 @@ function reposition() {
                 for (let i = 1; i <= length; i++) {
                     snake[i] = temp[i - 1]
                 }
-            }
+            
             break;
 
         case "left":
-            opDirection="right";
-            if (length === 0 || prevDir != "right") {
+            opDirection="right";   
                 for (let j = 0; j < length; j++) { temp.push(snake[j]) }
                 snake[0] = snake[0] - 1;
                 if (snake[0] % size === 0) {
@@ -121,52 +120,59 @@ function reposition() {
                         snake[i] = temp[i - 1]
                     }
                 }
-            }
-            break;
-
-    }
-    if(prevDir != opDirection){
+            
+            break;  
+}
+    
     prevDir = direction;
-    }
+    
     collision();
     drawSnake("black");
     if (snake[0] === apple) {
-        document.getElementById("score").innerHTML ="Score: "+score;
+        document.getElementById("score").innerHTML ="Score: "+(score++);
         addSnake();
     }
 
 }
 
 function keyDownEvent(e) {
-    e=e
+
     switch (e.keyCode) {
         case 87:
+            if(prevDir != "down"){
             direction = "up"
+            }
             break;
         case 65:
+            if(prevDir != "right"){
             direction = "left"
+            }
             break;
         case 83:
+            if(prevDir != "up"){
             direction = "down"
+            }
             break;
         case 68:
+            if(prevDir != "left"){
             direction = "right"
+            }
             break;
     }
-    setTimeout(reposition(), 500);
 }
 function DrawApple() {
     apple = Math.floor((Math.random() * maxSize) + 1);
-    if (apple != snake[0]) {
+    for(let i = 0; i <= length;i++){
+    if (apple != snake[i]) {
         document.getElementById("td" + apple).style.backgroundColor = "red"
     }
     else {
         DrawApple()
     }
+    }
 }
 
 function addSnake() {
-    score++;
     length++;
     switch (direction) {
 
@@ -195,12 +201,14 @@ function collision(){
         if(snake[0] === snake[o]){
             document.getElementById("gameState").innerHTML="GAME OVER"
             document.removeEventListener("keydown" , keyDownEvent);
+            clearInterval(intva);
             setTimeout(function(){ document.getElementById("gameState").innerHTML="", 3000}); 
             setTimeout(function(){ document.getElementById("start").style.display="block", 3000});
         }
     }
 }
 function reset(){
+    
     counter=1;
     direction = "left"
     prevDir = "right";
