@@ -5,7 +5,7 @@ let counter = 1;
 let snake = [Math.round((size * size) / 2)];
 let maxSize = size * size;
 let direction = "left"
-let score = 0;
+let score = 1;
 let apple;
 let length = 0;
 let prevDir = "right";
@@ -43,9 +43,19 @@ function drawSnake(color) {
 }
 
 function start() {
+    reset();  
+    document.getElementById("start").style.display="none"
     drawSnake("black");
-    document.addEventListener("keydown", keyDownEvent);
+    countdown();
     DrawApple();
+}
+function countdown(){
+    setTimeout(function(){document.getElementById("gameState").innerHTML="3"} , 1000)
+    setTimeout(function(){document.getElementById("gameState").innerHTML="2"} , 2000)
+    setTimeout(function(){document.getElementById("gameState").innerHTML="1"} , 3000)
+    setTimeout(function(){document.getElementById("gameState").innerHTML="GO"} , 4000)
+    setTimeout(function(){document.getElementById("gameState").innerHTML="" }, 5000)
+    setTimeout(function(){document.addEventListener("keydown", keyDownEvent)}, 4000);
 }
 
 function reposition() {
@@ -121,13 +131,14 @@ function reposition() {
     collision();
     drawSnake("black");
     if (snake[0] === apple) {
-        document.getElementById("score").value = score;
+        document.getElementById("score").innerHTML ="Score: "+score;
         addSnake();
     }
 
 }
 
 function keyDownEvent(e) {
+    e=e
     switch (e.keyCode) {
         case 87:
             direction = "up"
@@ -160,40 +171,48 @@ function addSnake() {
     switch (direction) {
 
         case "up":
-            snake.push(snake[length - 1] + size);
-            if (snake[0] <= 0) {
-                snake.push(snake[length - 1] - maxSize);
-            }
+            snake.push(snake[0]);
             break;
 
         case "down":
-            snake.push(snake[length - 1] - size);
-            if (snake <= 0) {
-                snake.push(maxSize + snake[length - 1]);
-            }
+            snake.push(snake[0]);
             break;
 
         case "left":
-            snake.push(snake[length - 1] + 1);
-            if (snake[length] % size === 1) {
-                snake.push(snake[length] - size);
-            }
+            snake.push(snake[0] + 1);
             break;
 
         case "right":
-            snake.push(snake[length - 1] - 1);
-            if (snake[length] % size === 0) {
-                snake.push(snake[length] + size);
-            }
+            snake.push(snake[0] - 1);
             break;
-    }
+        }
     DrawApple();
 }
+
 
 function collision(){
     for(let o = 4; o <= length; o++){
         if(snake[0] === snake[o]){
-            document.getElementById("gameState").value="game over";
+            document.getElementById("gameState").innerHTML="GAME OVER"
+            document.removeEventListener("keydown" , keyDownEvent);
+            setTimeout(function(){ document.getElementById("gameState").innerHTML="", 3000}); 
+            setTimeout(function(){ document.getElementById("start").style.display="block", 3000});
         }
     }
+}
+function reset(){
+    counter=1;
+    direction = "left"
+    prevDir = "right";
+    opDirection = "right";
+    length = 0;
+    score = 1;
+    document.getElementById("score").innerHTML="Score: "+score;
+    apple = 0;
+    for(let i = 1; i < snake.length; i++){
+    snake.pop();
+    snake[0] = Math.round((size * size) / 2); 
+    }
+    drawGrid();
+
 }

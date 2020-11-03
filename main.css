@@ -1,3 +1,4 @@
+@font-face { font-family: GAMEFONT; src: url('./PressStart2P-Regular.ttf'); }
 body{
     padding:0;
     margin:0;
@@ -10,4 +11,35 @@ td
 	margin: 0px;
     padding: 0px;
     
+}
+
+#wrapper{
+	margin-top:20px;
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#start{
+	font-family: GAMEFONT;
+	font-size:20px;
+	position: absolute;
+	top:20%;
+	display: block;
+}
+
+#gameState{
+	font-family: GAMEFONT;
+	font-size:20px;
+	position: absolute;
+	top:20%;
+	
+}
+#score{
+	font-family: GAMEFONT;
+	font-size:20px;	
+}
+#innerwrapper{
+	display: flex;
+	align-items: center;
 }
