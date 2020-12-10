@@ -5,10 +5,36 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>ResponsivPictures</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+
 </head>
+<style>
+    body{
+        padding:0;
+        margin:0;
+        background-color:darkcyan;
+    }
+    #img{
+        width:50vw;
+        margin-left:25vw;
+        margin-top:5vh;
+    }
+    #button{
+    text-decoration: none;
+    font-size: 2vw;
+    font-family: 'Courier New', Courier, monospace;
+    color:white;
+    background-color: darkblue;
+    padding:1.5vw;
+    }
+    #button:hover{
+    background-color: darkcyan;
+    color:white;
+}
+</style>
 <body>
-    <a href="./Responsiv1.html">Seite 1</a>
-    <img sizes="(max-width: 1920px) 100vw, 1920px"
+
+   
+    <img id="img" sizes="(max-width: 1920px) 100vw, 1920px"
     srcset="
     Valentin_Seeger_MusterStrukturen_DSC_0291_jxlnge_c_scale,w_400.jpg 400w,
     Valentin_Seeger_MusterStrukturen_DSC_0291_jxlnge_c_scale,w_807.jpg 807w,
@@ -19,5 +45,6 @@
     Valentin_Seeger_MusterStrukturen_DSC_0291_jxlnge_c_scale,w_1920.jpg 1920w"
     src="Valentin_Seeger_MusterStrukturen_DSC_0291_jxlnge_c_scale,w_1920.jpg"
     alt=""> 
+    <a id="button" href="./Responsiv1.html">Seite 1</a>
 </body>
 </html>
