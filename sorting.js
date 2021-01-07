@@ -52,6 +52,7 @@ function bubbleSort(){
         genArray(document.getElementById("slider").value);
     }
     document.getElementById("slider").disabled = true;
+    document.getElementById("speed").disabled = true;
     sorted = true; 
     let counter = 1;
     let n = myArray.length;
@@ -69,6 +70,7 @@ function bubbleSort(){
         } 
     }
     setTimeout(function(){document.getElementById("slider").disabled = false;}, delay+speed);
+    setTimeout(function(){document.getElementById("speed").disabled = false;}, delay+speed);
 }
 
 function insertionSort() {
@@ -76,6 +78,7 @@ function insertionSort() {
         genArray(document.getElementById("slider").value);
     }
     document.getElementById("slider").disabled = true;
+    document.getElementById("speed").disabled = true;
     sorted = true;
     let n = myArray.length;
         for (let i = 1; i < n; i++) {  
@@ -90,6 +93,7 @@ function insertionSort() {
             swap(myArray);
         }
         setTimeout(function(){document.getElementById("slider").disabled = false;}, delay+speed);
+        setTimeout(function(){document.getElementById("speed").disabled = false;}, delay+speed);
 }
 
 function selectionSort() { 
@@ -97,6 +101,7 @@ function selectionSort() {
         genArray(document.getElementById("slider").value);
     }
     document.getElementById("slider").disabled = true;
+    document.getElementById("speed").disabled = true;
     sorted = true;
     let n = myArray.length;   
     for(let i = 0; i < n; i++) {
@@ -115,6 +120,7 @@ function selectionSort() {
         }
     }
     setTimeout(function(){document.getElementById("slider").disabled = false;}, delay+speed);
+    setTimeout(function(){document.getElementById("speed").disabled = false;}, delay+speed);
 }
 }
 
