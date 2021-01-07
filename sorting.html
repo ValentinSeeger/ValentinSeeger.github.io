@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='sorting.css'>
+    <script src='sorting.js'></script>
+</head>
+
+<body>
+    <header>
+        <div id="wrp">
+        <p>Value count 10-150:</p>
+        <input type="range" id="slider" value="45" min="10" max="150">
+        <div id="values"></div> 
+        </div>
+
+        
+        <input type="button" value="bubbleSort" id="sortButton" onclick="bubbleSort()">  
+        <input type="button" value="insertionSort" id="sortButton" onclick="insertionSort()">
+        <input type="button" value="selectionSort" id="sortButton" onclick="selectionSort()">    
+
+    </header>
+    <wrapper id="wrapper">
+
+    </wrapper>
+    <div id="speedBox">
+        <div>Speed 1-99</div>
+        <input type="range" id="speed" value="10" min="1" max="99">
+        <div>1 Thread per</div>
+        <div id="speedValues"></div>
+    </div>
+</body>
+<script>
+    slider = document.getElementById("slider");
+    document.getElementById("values").innerHTML = document.getElementById("slider").value;
+    genArray(document.getElementById("slider").value);
+    slider.oninput = function () {
+        document.getElementById("values").innerHTML = document.getElementById("slider").value;
+        genArray(document.getElementById("slider").value);
+    }
+    speedDom = document.getElementById("speed");
+    document.getElementById("speedValues").innerHTML = document.getElementById("speed").value+"ms";
+    speedDom.oninput = function (){
+    document.getElementById("speedValues").innerHTML = document.getElementById("speed").value+"ms";
+    changeSpeed(document.getElementById("speed").value)
+    }
+ 
+</script>
+
+</html>
