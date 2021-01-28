@@ -44,6 +44,10 @@ function removeObj(){
 function changeSpeed(HTMLSpeed){
     speed = Number(HTMLSpeed);
 }
+//Disable Sliders and Buttons to avoid multiple funtion calls
+function disable(){
+    
+}
 
 //Sorts
 {

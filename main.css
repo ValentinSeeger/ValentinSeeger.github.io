@@ -1,18 +1,85 @@
-body{
-    margin:0;
-    padding:0;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Courier New", Courier, monospace;
 }
 
-header{
-    clip-path: polygon(0 0, 100% 0, 100% 72%, 0 48%);
-    height: 15vh;
-    background-color: deepskyblue;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding-bottom:5vh;
+header {
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 0 48%);
+  height: 30vh;
+  background-color: black;
+  align-items: center;
+  color: white;
 }
-header h2{
-    rotate:30deg;
-    padding:1vh
+#headimg {
+  width: 50vw;
+  rotate:40deg ;
+  height: auto;
+  position: absolute;
+  top: 5vw;
+  left:25vw;
+  transform: rotateZ(3%);
+}   
+#sorting {
+  font-size: 1vw;
+  border: 1px solid black;
+  width: 10vw;
+  height: 10vw;
+  margin: 10vw;
+  box-shadow: inset -3px 2px 0 0px;
+  overflow: hidden;
+}
+
+/*Slides*/
+
+input[type="checkbox"] {
+  position: absolute; /* Force the checkbox at the start of the container */
+  cursor: pointer; /* Indicate the curtain is clickable */
+  width: 10vw; /* The checkbox is as wide as the component */
+  height: 10vw; /* The checkbox is as tall as the component */
+  z-index: 99; /* Make sure the checkbox is on top of everything else */
+  opacity: 0; /* hide the checkbox */
+}
+
+/* Slide the first panel in */
+input[type="checkbox"]:checked ~ div.curtain__panel--left {
+  transform: translateX(0);
+}
+
+/* Slide the second panel in */
+input[type="checkbox"]:checked ~ div.curtain__panel--right {
+  transform: translateX(0);
+}
+
+.curtain__panel {
+  background: white;
+  width: 5vw; /* Each panel takes up half the container */
+  height: 10vw; /* Used for demo purposes */
+  float: left; /* Makes sure panels are side-by-side */
+  position: relative; /* Needed to define the z-index */
+  z-index: 2; /* Places the panels in front of the prize */
+  transition: all 1s ease-out; /* Animates the sliding transition */
+}
+
+.curtain__panel--left {
+  text-align: right;
+  transform: translateX(-100%);
+}
+
+.curtain__panel--right {
+  text-align: left;
+  transform: translateX(100%);
+}
+
+.curtain__prize {
+  text-align: center;
+  background: #fff;
+  position: absolute; /* Forces the prize position into the container start */
+  z-index: 1; /* Places the prize behind the panels, which are z-index 2 */
+  width: 10vw;
+  height: 10vw;
+  overflow: hidden;
+}
+.curtain__prize img {
+  width: 10vw;
 }
